@@ -1,0 +1,14 @@
+{
+  "name": "college-katta-api",
+  "version": "1.0.0",
+  "description": "College Katta Backend API",
+  "main": "server/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "nodemon server/index.js"
+  },
+  "engines": {
+    "node": "18.x"
+  }
+}
