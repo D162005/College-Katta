@@ -36,7 +36,7 @@
 - [Contributing](#-contributing)
 - [License](#-license)
 - [Support & Contact](#-support--contact)
-- [Future-Roadmap] (#-Future-Roadmap)
+- [Future Roadmap](#-future-roadmap)
 
 ---
 
@@ -375,132 +375,183 @@ npm install        # Install all dependencies
 
 ```
 college-katta/
-├── src/                          # Frontend source code
-│   ├── components/               # Reusable React components
-│   │   ├── Layout.jsx
----
-
-## 📁 Project Structure
-
+│
+├─ 🎨 FRONTEND (React + Vite)
+│  │
+│  └─ src/
+│     ├─ components/                    # Reusable React Components
+│     │  ├─ AdminRoute.jsx             # Admin-only route protection
+│     │  ├─ FileUploadModal.jsx        # File upload dialog component
+│     │  ├─ Layout.jsx                 # Main layout wrapper
+│     │  ├─ Login.jsx                  # Login form component
+│     │  ├─ NotificationBar.jsx        # Toast notification display
+│     │  ├─ PrivateRoute.jsx           # User-only route protection
+│     │  ├─ Register.jsx               # Registration form component
+│     │  └─ StudyMaterialUploadModal.jsx # Study material upload
+│     │
+│     ├─ pages/                        # Page Components (Routes)
+│     │  ├─ AdminDashboard.jsx         # Admin control panel
+│     │  ├─ AdminStudyMaterials.jsx    # Admin materials management
+│     │  ├─ ChatDiscussion.jsx         # Real-time chat interface
+│     │  ├─ Home.jsx                   # Landing/home page
+│     │  ├─ LabManual.jsx              # Lab manual materials
+│     │  ├─ Login.jsx                  # Login page
+│     │  ├─ MyUploads.jsx              # User's uploaded files
+│     │  ├─ MyUploads.new.jsx          # New uploads interface
+│     │  ├─ Notes.jsx                  # Study notes page
+│     │  ├─ PersonalFiles.jsx          # User's personal file manager
+│     │  ├─ Profile.jsx                # User profile page
+│     │  ├─ Projects.jsx               # Projects materials
+│     │  ├─ PYQ.jsx                    # Previous year questions
+│     │  ├─ Recent.jsx                 # Recent materials
+│     │  ├─ Register.jsx               # Registration page
+│     │  ├─ Saved.jsx                  # Saved/bookmarked materials
+│     │  ├─ StudyMaterial.jsx          # Single material view
+│     │  ├─ StudyMaterials.jsx         # Browse all materials
+│     │  ├─ Unauthorized.jsx           # 403 error page
+│     │  ├─ UserDashboard.jsx          # User dashboard
+│     │  └─ admin/
+│     │     ├─ Dashboard.jsx           # Admin dashboard variant
+│     │     ├─ PendingFiles.jsx        # Pending approvals
+│     │     └─ Users.jsx               # User management
+│     │
+│     ├─ context/                      # React Context (State Management)
+│     │  ├─ AuthContext.jsx            # Authentication state
+│     │  ├─ ChatContext.jsx            # Chat messages state
+│     │  ├─ FileContext.jsx            # File operations state
+│     │  ├─ GeneralChatContext.jsx     # General chat state
+│     │  └─ StudyMaterialContext.jsx   # Study materials state
+│     │
+│     ├─ services/                     # API Services
+│     │  └─ (API service modules)
+│     │
+│     ├─ styles/                       # Global Styles
+│     │  └─ (CSS files)
+│     │
+│     ├─ utils/                        # Utility Functions
+│     │  └─ formatUtils.js             # Date & text formatting
+│     │
+│     ├─ assets/                       # Static Assets
+│     │  └─ (Images, icons, fonts)
+│     │
+│     ├─ App.jsx                       # Root app component with routes
+│     ├─ main.jsx                      # Vite entry point
+│     ├─ index.css                     # Global styles
+│     └─ testUpload.txt                # Test file
+│
+├─ 🔧 BACKEND (Node.js + Express)
+│  │
+│  └─ server/
+│     ├─ routes/                       # API Route Handlers
+│     │  ├─ auth.js                   # Authentication endpoints
+│     │  ├─ chat.js                   # Chat room endpoints
+│     │  ├─ files.js                  # File management endpoints
+│     │  ├─ messages.js               # Message endpoints
+│     │  ├─ personalFiles.js          # Personal files endpoints
+│     │  ├─ personalFilesRoutes.js    # Alternative personal files routes
+│     │  ├─ studyMaterials.js         # Study materials endpoints
+│     │  ├─ test.js                   # Testing routes
+│     │  └─ users.js                  # User management endpoints
+│     │
+│     ├─ models/                      # MongoDB Schemas
+│     │  ├─ Chat.js                   # Chat room model
+│     │  ├─ File.js                   # File metadata model
+│     │  ├─ Message.js                # Message model
+│     │  ├─ PersonalFile.js           # Personal file model
+│     │  ├─ PersonalFolder.js         # Personal folder model
+│     │  ├─ StudyMaterial.js          # Study material model
+│     │  └─ User.js                   # User model
+│     │
+│     ├─ middleware/                  # Express Middleware (Legacy)
+│     │  ├─ authMiddleware.js         # JWT authentication
+│     │  └─ uploadMiddleware.js       # File upload handling
+│     │
+│     ├─ middlewares/                 # Express Middleware (Current)
+│     │  ├─ authMiddleware.js         # JWT verification
+│     │  └─ fileUpload.js             # Multer file upload config
+│     │
+│     ├─ controllers/                 # Business Logic Controllers
+│     │  └─ personalFilesController.js # Personal files logic
+│     │
+│     ├─ utils/                       # Helper Utilities
+│     │  ├─ adminSeeder.js            # Create admin user on startup
+│     │  ├─ error.js                  # Custom error classes
+│     │  ├─ formatUtils.js            # Data formatting functions
+│     │  └─ verifyToken.js            # JWT token verification
+│     │
+│     ├─ uploads/                     # Uploaded Files Storage
+│     │  ├─ personal/                 # User personal files
+│     │  ├─ personal-files/           # Alternative personal files
+│     │  └─ temp/                     # Temporary files
+│     │
+│     ├─ local_storage/               # Fallback JSON Storage (Offline Mode)
+│     │  ├─ chat.json                 # Chat data backup
+│     │  ├─ files.json                # Files metadata backup
+│     │  ├─ messages.json             # Messages backup
+│     │  ├─ study_materials.json      # Study materials backup
+│     │  ├─ users.json                # Users data backup
+│     │  ├─ files/                    # Uploaded files storage
+│     │  ├─ study_materials/          # Study materials storage
+│     │  └─ user_data/                # User data storage
+│     │
+│     ├─ index.js                     # Express server entry point
+│     ├─ setupDatabase.js             # MongoDB connection setup
+│     ├─ simpleChatServer.js          # Socket.io chat logic
+│     ├─ renderConfig.json            # Render deployment config
+│     ├─ render.json                  # Render configuration
+│     └─ .env                         # Backend environment variables
+│
+├─ 📦 CONFIGURATION FILES
+│  ├─ package.json                    # Dependencies & npm scripts
+│  ├─ vite.config.js                  # Vite build configuration
+│  ├─ tailwind.config.js              # Tailwind CSS configuration
+│  ├─ postcss.config.js               # PostCSS configuration
+│  ├─ eslint.config.js                # ESLint code quality rules
+│  ├─ vercel.json                     # Vercel deployment config
+│  ├─ index.html                      # HTML entry point
+│  ├─ .gitignore                      # Git ignore rules
+│  ├─ .env                            # Frontend environment variables
+│  └─ .env.production                 # Production environment variables
+│
+├─ 📚 DOCUMENTATION & LICENSE
+│  ├─ README.md                       # Main project documentation
+│  ├─ DEPLOYMENT_GUIDE.md             # Step-by-step deployment guide
+│  ├─ QUICK_DEPLOY.md                 # Quick deployment checklist
+│  ├─ README-CHAT.md                  # Chat feature documentation
+│  └─ LICENSE                         # MIT License
+│
+└─ 📁 UPLOADS (Runtime)
+   ├─ personal/                       # User personal file uploads
+   └─ personal_materials/             # User material uploads
 ```
-college-katta/
-│
-├── 🎨 Frontend (React + Vite)
-├── src/
-│   ├── components/              # Reusable React components
-│   │   ├── Layout.jsx            # Main layout wrapper
-│   │   ├── PrivateRoute.jsx      # Protected routes component
-│   │   ├── AdminRoute.jsx        # Admin-only routes
-│   │   ├── FileUploadModal.jsx   # Upload dialog
-│   │   └── ...
-│   │
-│   ├── pages/                   # Page/Screen components
-│   │   ├── Home.jsx             # Landing page
-│   │   ├── Login.jsx            # Authentication
-│   │   ├── Register.jsx         # New user signup
-│   │   ├── StudyMaterials.jsx   # Browse materials
-│   │   ├── PersonalFiles.jsx    # User's uploads
-│   │   ├── ChatDiscussion.jsx   # Real-time chat
-│   │   ├── AdminDashboard.jsx   # Admin panel
-│   │   ├── MyUploads.jsx        # User uploads page
-│   │   ├── Profile.jsx          # User profile
-│   │   ├── NotFound.jsx         # 404 page
-│   │   └── ...
-│   │
-│   ├── context/                 # React Context (State Management)
-│   │   ├── AuthContext.jsx      # Authentication state
-│   │   ├── FileContext.jsx      # File operations state
-│   │   ├── ChatContext.jsx      # Chat messages state
-│   │   ├── StudyMaterialContext.jsx
-│   │   └── ...
-│   │
-│   ├── styles/                  # Global CSS files
-│   │   └── globals.css
-│   │
-│   ├── utils/                   # Helper functions
-│   │   └── formatUtils.js       # Date, text formatting
-│   │
-│   ├── assets/                  # Images, icons
-│   │
-│   ├── App.jsx                  # Root component with routes
-│   ├── main.jsx                 # Vite entry point
-│   └── index.css                # Global styles
-│
-├── 🔧 Backend (Node.js + Express)
-├── server/
-│   ├── routes/                  # API route handlers
-│   │   ├── auth.js              # Authentication endpoints
-│   │   ├── files.js             # File operations
-│   │   ├── users.js             # User management
-│   │   ├── chat.js              # Chat rooms
-│   │   ├── messages.js          # Chat messages
-│   │   ├── studyMaterials.js    # Study materials CRUD
-│   │   ├── personalFiles.js     # User personal files
-│   │   └── test.js              # Testing routes
-│   │
-│   ├── models/                  # MongoDB schemas
-│   │   ├── User.js              # User schema
-│   │   ├── File.js              # File metadata schema
-│   │   ├── Message.js           # Chat message schema
-│   │   ├── Chat.js              # Chat room schema
-│   │   ├── StudyMaterial.js     # Material schema
-│   │   ├── PersonalFile.js      # User file schema
-│   │   └── ...
-│   │
-│   ├── middleware/              # Express middleware
-│   │   ├── authMiddleware.js    # JWT verification
-│   │   ├── uploadMiddleware.js  # Multer file upload
-│   │   └── errorHandler.js      # Error handling
-│   │
-│   ├── utils/                   # Helper utilities
-│   │   ├── verifyToken.js       # JWT token verify
-│   │   ├── formatUtils.js       # Data formatting
-│   │   ├── error.js             # Custom errors
-│   │   └── adminSeeder.js       # Create admin user
-│   │
-│   ├── uploads/                 # Uploaded files storage
-│   │   ├── personal/            # User personal files
-│   │   ├── personal-files/      # More user files
-│   │   └── temp/                # Temporary files
-│   │
-│   ├── local_storage/           # Fallback JSON storage
-│   │   ├── users.json           # User data backup
-│   │   ├── files.json           # Files backup
-│   │   ├── messages.json        # Messages backup
-│   │   └── chat.json            # Chat backup
-│   │
-│   ├── index.js                 # Server entry point
-│   ├── setupDatabase.js         # DB connection setup
-│   ├── simpleChatServer.js      # Chat server logic
-│   ├── renderConfig.json        # Render deployment config
-│   └── .env                     # Environment variables (not in git)
-│
-├── 📦 Configuration Files
-├── package.json                 # Dependencies & scripts
-├── vite.config.js               # Vite build config
-├── tailwind.config.js           # Tailwind CSS config
-├── postcss.config.js            # PostCSS config
-├── eslint.config.js             # Linting rules
-├── vercel.json                  # Vercel deployment
-├── .gitignore                   # Git ignore rules
-├── .env                         # Frontend env vars (not in git)
-├── index.html                   # HTML entry point
-│
-└── 📚 Documentation
-    ├── README.md                # This file
-    ├── DEPLOYMENT_GUIDE.md      # Deployment instructions
-    ├── QUICK_DEPLOY.md          # Quick start for deploy
-    ├── README-CHAT.md           # Chat feature guide
-    └── LICENSE                  # MIT License
-```
 
-### Key Folders Summary
-| Folder | Purpose |
-|--------|---------|
-| `src/` | All frontend React code |
-| `server/` | All backend Express code |
-| `uploads/` | Stored uploaded files |
-| `local_storage/` | Offline fallback data |
+### 📊 Folder Purpose Guide
+
+| Folder | Purpose | Contains |
+|--------|---------|----------|
+| **src/** | Frontend application | React components, pages, styles |
+| **server/** | Backend API server | Routes, models, middleware |
+| **server/uploads/** | User-uploaded files | Documents, images, PDFs |
+| **server/local_storage/** | Offline fallback | JSON backups, cached data |
+| **components/** | Reusable UI parts | Modal, navbar, forms |
+| **pages/** | Screen components | Full-page views |
+| **context/** | State management | Auth, chat, files state |
+| **routes/** | API endpoints | CRUD operations |
+| **models/** | Database schemas | User, file, chat definitions |
+| **middleware/** | Request handlers | Auth, file upload |
+| **utils/** | Helper functions | Token verify, formatting |
+
+### 🔑 Key Files Explained
+
+| File | Purpose |
+|------|---------|
+| `server/index.js` | Main backend server - starts Express & Socket.io |
+| `src/App.jsx` | Main frontend app - defines all routes |
+| `src/context/AuthContext.jsx` | Handles user authentication state |
+| `server/routes/auth.js` | Login, register, user verification |
+| `server/models/User.js` | User data structure |
+| `package.json` | Project dependencies & scripts |
+| `.env` | Environment variables (API URLs, secrets) |
 
 ---
 
@@ -977,7 +1028,7 @@ This project stands on the shoulders of giants. Thank you to:
 
 ---
 
-## 🚀 Future-Roadmap
+## 🚀 Future Roadmap
 
 ### Upcoming Features
 - 📌 Advanced search filters
