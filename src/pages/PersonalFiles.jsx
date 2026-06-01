@@ -59,7 +59,7 @@ const PersonalFiles = () => {
   const maxRetries = 3;
   
   // Use consistent API URL across the application
-  const API_URL = 'http://localhost:5002/api';
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5002/api';
   
   console.log('PersonalFiles component initialized');
   console.log('API URL:', API_URL);
